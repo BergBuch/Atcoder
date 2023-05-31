@@ -11,5 +11,9 @@ using vvll = vector<vector<long long>>;
 #define sayYes cout<<"Yes"<<endl;
 #define sayNo cout<<"No"<<endl;
 int main(){
-    
+    ll a,b;
+    cin >> a >> b;
+    ll ans = a/b;
+    if(a%b!=0)ans++;
+    cout << ans << endl;
 }
