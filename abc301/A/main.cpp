@@ -11,5 +11,21 @@ using vvll = vector<vector<long long>>;
 #define sayYes cout<<"Yes"<<endl;
 #define sayNo cout<<"No"<<endl;
 int main(){
-    
+    int n;
+    string s;
+    cin>>n>>s;
+    int t,a;
+    t=a=0;
+    rep(i,0,n){
+        if(s[i]=='T')t++;
+        else a++;
+        if(t==(n+1)/2){
+            cout<<"T"<<endl;
+            return 0;
+        }
+        if(a==(n+1)/2){
+            cout<<"A"<<endl;
+            return 0;
+        }
+    }
 }
