@@ -12,5 +12,19 @@ using vvll = vector<vector<long long>>;
 #define sayYes cout<<"Yes"<<endl;
 #define sayNo cout<<"No"<<endl;
 int main(){
-    
+    ll n;
+    cin >> n;
+    ll cn = n;
+    int ketasu=1;
+    while(true){
+        cn /= 10;
+        if(cn>0)ketasu++;
+        else break;
+    }
+    if(ketasu<=3){
+        cout << n << endl;
+        return 0;
+    }
+    ll ee[]={1,1,1,1,10,100,1000,10000,100000,1000000,};
+    cout << (n/ee[ketasu])*ee[ketasu] << endl;
 }
