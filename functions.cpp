@@ -39,3 +39,9 @@ vector<long long>find_prime(long long n){
     for(int i=1;i<n+1;i++) if(is_prime[i]) prime_list.push_back(i);
     return prime_list;
 }
+
+vector<int> calc_divisors(int n){
+    vector<int> divisors;
+    for(int i=1;i<=n;i++) if(n%i==0) divisors.push_back(i);
+    return divisors;
+}
