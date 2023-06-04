@@ -42,6 +42,15 @@ vector<long long>find_prime(long long n){
 
 vector<int> calc_divisors(int n){
     vector<int> divisors;
-    for(int i=1;i<=n;i++) if(n%i==0) divisors.push_back(i);
+    for(int i=1;i*i<=n;i++) if(n%i==0) divisors.push_back(i);
+    int half = divisors.size();
+    for(int i=half-1;i>=0;i--){
+        if(divisors[i]*divisors[i]==n) continue;
+        divisors.push_back(n/divisors[i]);
+    }
     return divisors;
+}
+
+int main(){
+    for(auto e:calc_divisors(100)) cout << e;
 }

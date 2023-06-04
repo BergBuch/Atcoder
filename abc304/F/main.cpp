@@ -26,10 +26,44 @@ vector<long long>find_prime(long long n){
 
 vector<int> calc_divisors(int n){
     vector<int> divisors;
-    for(int i=1;i<=n;i++) if(n%i==0) divisors.push_back(i);
+    for(int i=1;i*i<=n;i++) if(n%i==0) divisors.push_back(i);
+    int half = divisors.size();
+    for(int i=half-1;i>=0;i--){
+        if(divisors[i]*divisors[i]==n) continue;
+        divisors.push_back(n/divisors[i]);
+    }
     return divisors;
 }
-
 int main(){
-    cout << find_prime(100000).size();
+    const ll mod = 998244353;
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+
+    vi divisors = calc_divisors(n);
+    vector<int> a(n+1),m(n+1);
+    repa(e,divisors){
+        if(e==n) continue;
+        int cnt_absent = 0;
+        for(int i=0;i<e;i++){
+            bool can_absent = true;
+            for(int j=i+e;j<n;j+=e) if(s[j]=='.') can_absent = false;
+            if(can_absent) cnt_absent++;
+        }
+        a[e] = (1 << cnt_absent);
+        cout << e << ":" << a[e] << endl;
+    }
+    m[1] = a[1];
+    repa(e,divisors){
+        if(e==1)continue;
+        m[e] = a[e];
+        repa(f,calc_divisors(e)){
+            if(e==f)continue;
+            m[e] -= m[f];
+        }
+    }
+    int ans = 0;
+    repa(e,divisors) ans += m[e];
+    cout << ans << endl;
 }
