@@ -34,8 +34,14 @@ vector<int> calc_divisors(int n){
     }
     return divisors;
 }
+
+int mod(int x){
+    const ll this_mod = 998244353;
+    if(x>0) return x%this_mod;
+    else return mod(x+this_mod);
+}
+
 int main(){
-    const ll mod = 998244353;
     int n;
     cin >> n;
     string s;
@@ -45,25 +51,31 @@ int main(){
     vector<int> a(n+1),m(n+1);
     repa(e,divisors){
         if(e==n) continue;
-        int cnt_absent = 0;
+        a[e] = 1;
         for(int i=0;i<e;i++){
             bool can_absent = true;
-            for(int j=i+e;j<n;j+=e) if(s[j]=='.') can_absent = false;
-            if(can_absent) cnt_absent++;
+            for(int j=i;j<n;j+=e) if(s[j]=='.') can_absent = false;
+            if(can_absent){
+                a[e] = a[e]*2;
+                a[e] = mod(a[e]);
+            }
         }
-        a[e] = (1 << cnt_absent);
-        cout << e << ":" << a[e] << endl;
     }
     m[1] = a[1];
     repa(e,divisors){
-        if(e==1)continue;
+        if(e==1 or e==n)continue;
         m[e] = a[e];
         repa(f,calc_divisors(e)){
             if(e==f)continue;
             m[e] -= m[f];
+            m[e] = mod(m[e]);
         }
     }
     int ans = 0;
-    repa(e,divisors) ans += m[e];
-    cout << ans << endl;
+    repa(e,divisors){
+        if(e==n) continue;
+        ans += m[e];
+        ans = mod(ans);
+    }
+    cout << mod(ans) << endl;
 }
