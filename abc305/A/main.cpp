@@ -12,5 +12,12 @@ using vvll = vector<vector<long long>>;
 #define sayYes cout<<"Yes"<<endl;
 #define sayNo cout<<"No"<<endl;
 int main(){
-    
+    int n;
+    cin >> n;
+    if(n%5<=2){
+        cout << (n/5)*5 << endl;
+    }
+    else{
+        cout << (n/5 + 1)*5 << endl;
+    }
 }
