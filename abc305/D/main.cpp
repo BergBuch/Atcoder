@@ -12,5 +12,21 @@ using vvll = vector<vector<long long>>;
 #define sayYes cout<<"Yes"<<endl;
 #define sayNo cout<<"No"<<endl;
 int main(){
+    int n;
+    cin >> n;
+    vector<long long> a(n+1);
+    for(int i=1; i<=n; i++){
+        cin >> a[i];
+    }
     
+
+
+    int q;
+    cin >> q;
+    for(int i=0; i<q; i++){
+        long long l,r;
+        cin >> l >> r;
+
+
+    }
 }
