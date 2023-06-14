@@ -52,5 +52,5 @@ vector<int> calc_divisors(int n){
 }
 
 int main(){
-    for(auto e:calc_divisors(100)) cout << e;
+    for(auto e:find_prime(100)) cout << e;
 }
