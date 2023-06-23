@@ -10,17 +10,18 @@ int main(){
     for(int i=0; i<N; i++){
         cin >> A[i];
     }
-    long long l=1LL,r=1000000000LL;
+    long long l=1LL,r=1000000001LL;
     while(l<r-1){
         long long c = (l+r+1)/2;
-        cout << "searching " << c << endl;
+        //cout << "searching " << c << endl;
         long long x=0,y=0;
         for(int i=0; i<N; i++){
             if(A[i]<c) x += ((c-A[i])%a==0)?((c-A[i])/a):((c-A[i])/a + 1);
+            if(A[i]>c) y += (A[i]-c)/b;
         }
         if(x>y) r=c;
         else l=c;
-        cout << "l=" << l << ",r=" << r << endl;
+        //cout << "l=" << l << ",r=" << r << endl;
     }
     cout << l << endl;
 }
