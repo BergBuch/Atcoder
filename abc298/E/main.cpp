@@ -20,16 +20,14 @@ int main(){
     cin >> N >> A >> B >> P >> Q;
     long long Pinv = mod_inv(P,mod);
     long long Qinv = mod_inv(Q,mod);
-    for(int i=0;i++;i<N) dp[N][i][1] = 1;
-    for(int i=N-1; i>0; i--){
-        for(int j=1;j<=N;j++){
+    for(int i=0;i<N;i++) dp[N][i][1] = 1;
+    for(int i=N-1; i>=1; i--){
+        for(int j=N-1;j>=1;j--){
             for(int k=1;k<=P;k++){
-                dp[i][j][0] += (dp[min(i+k,N)][j][1] * Pinv) % mod;
-                dp[i][j][0] %= mod;
+                dp[i][j][0] = (dp[i][j][0] + dp[min(i+k,N)][j][1] * Pinv) % mod;
             }
             for(int k=1;k<=Q;k++){
-                dp[j][i][1] += (dp[j][min(i+k,N)][0] * Qinv) % mod;
-                dp[j][i][1] %= mod;
+                dp[j][i][1] = (dp[j][i][1] + dp[j][min(i+k,N)][0] * Qinv) % mod;
             }
         }
     }
