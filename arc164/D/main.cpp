@@ -8,12 +8,25 @@ int main(){
     string T;
     cin >> N >> T;
 
-    vector<int> e(2*N);
+    vector<vector<long long>> g(2*N+1,vector<long long>(N+2,0));
+    vector<vector<long long>> f(2*N+1,vector<long long>(N+2,0));
+
+    f[0][0] = 1;
+    
     for(int i=0; i<2*N; i++){
-        if(T[i]=='+') e[i] = 1;
-        if(T[i]=='-') e[i] = -1;
-        if(T[i]=='?') e[i] = 0;
+        for(int j=0; j<=N; j++){
+            if(T[i] != '-'){
+                f[i+1][j+1] += f[i][j]%mod;
+                g[i+1][j+1] += g[i][j] + f[i][j] * abs(2*j-i);
+                g[i+1][j+1] %= mod;
+            }
+            if(T[i] != '+'){
+                f[i+1][j] += f[i][j]%mod;
+                g[i+1][j] += g[i][j] + f[i][j] * abs(2*j-i);
+                g[i+1][j] %= mod;
+            }
+        }
     }
 
-    
+    cout << g[2*N][N] << endl;
 }
