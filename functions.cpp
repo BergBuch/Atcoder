@@ -51,6 +51,22 @@ vector<int> calc_divisors(int n){
     return divisors;
 }
 
+void bfs(int N,vector<vector<int>> edges){
+    queue<int> q;
+    q.push(0);
+    vector<bool> is_searched(N,false);
+    is_searched[0] = true;
+    while(!q.empty()){
+        int nowp = q.front();
+        q.pop();
+        for(auto nowc: edges[nowp]){
+            if(is_searched[nowc]) continue;
+            is_searched[nowc] = true;
+            q.push(nowc);
+        }
+    }
+}
+
 int main(){
     for(auto e:find_prime(100)) cout << e;
 }
